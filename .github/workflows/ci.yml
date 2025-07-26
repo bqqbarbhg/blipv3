@@ -26,5 +26,4 @@ jobs:
           pip install git+https://github.com/amaranth-lang/amaranth-boards.git#egg=amaranth-boards
           pip install pytest
       - name: Run tests
-        run: |
-          pytest
+        run: pytest
