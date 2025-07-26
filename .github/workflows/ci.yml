@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
 
-  ci_pre_hashes:
+  ci_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
