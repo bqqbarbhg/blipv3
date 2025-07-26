@@ -1,3 +1,4 @@
 
 sim_board = "mini3s"
+build_board = ""
 run_board = ""

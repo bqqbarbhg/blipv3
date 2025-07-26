@@ -27,3 +27,5 @@ jobs:
           pip install pytest
       - name: Run tests
         run: pytest
+      - name: Build examples
+        run: python -m examples build --all --board ulx3s_85f

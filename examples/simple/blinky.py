@@ -9,7 +9,7 @@ class Blinky(Elaboratable):
 
     @dataclass
     class Config:
-        counter_bits: int = 16
+        counter_bits: int = 24
         led_index: int = 0
 
     def __init__(self, board: blip.Board, config: Config):

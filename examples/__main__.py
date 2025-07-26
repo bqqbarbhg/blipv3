@@ -71,6 +71,43 @@ def cmd_sim(argv):
     with sim.write_vcd(vcd_path):
         sim.run_until(t_ck * argv.duration)
 
+def do_build(argv, example_name):
+    build_path = argv.o
+    if not build_path:
+        build_path = os.path.join("build", "build", example_name)
+    os.makedirs(build_path, exist_ok=True)
+
+    board_name = argv.board
+    if not board_name:
+        board_name = g_config.get("build_board")
+        assert board_name, "no default build_board set"
+    board: Board = Board.load(board_name)
+
+    print(f"Building {example_name} for {board.spec.info.name}")
+
+    example_type = all_examples.get(example_name)
+    assert example_type, f"no example found for name '{example_name}'"
+    config = get_config(example_type, argv.s)
+
+    example = example_type(board, config)
+
+    platform = board.platform
+    assert platform, "attempting to run without a platform"
+
+    platform.build(example, build_dir=build_path)
+
+def cmd_build(argv):
+    if argv.name:
+        assert not argv.all
+        do_build(argv, argv.name)
+    elif argv.all:
+        assert not argv.o, "-o not supported with --all"
+        assert not argv.s, "-s not supported with --all"
+        for example in all_examples:
+            do_build(argv, example)
+    else:
+        raise RuntimeError("Either specify example to build or --all")
+
 def cmd_run(argv):
     example_name = argv.name
 
@@ -118,8 +155,16 @@ if __name__ == "__main__":
     sim_parser.add_argument("--duration", type=int, default=100, help="Number of clock cycles to run")
     sim_parser.set_defaults(cmd=cmd_sim)
 
+    sim_parser = subparsers.add_parser("build", help="Build an example")
+    sim_parser.add_argument("name", nargs="?", help="Example name to build")
+    sim_parser.add_argument("--board", help="Board to use")
+    sim_parser.add_argument("-s", nargs="*", default=[], action="extend", help="Set configuration")
+    sim_parser.add_argument("-o", metavar="build/path", help="Output build path")
+    sim_parser.add_argument("--all", action="store_true", help="Build all examples")
+    sim_parser.set_defaults(cmd=cmd_build)
+
     sim_parser = subparsers.add_parser("run", help="Run an example")
-    sim_parser.add_argument("name", help="Example name to simulate")
+    sim_parser.add_argument("name", help="Example name to run")
     sim_parser.add_argument("--board", help="Board to use")
     sim_parser.add_argument("-s", nargs="*", default=[], action="extend", help="Set configuration")
     sim_parser.add_argument("-o", metavar="build/path", help="Output build path")
