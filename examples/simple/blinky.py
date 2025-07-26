@@ -20,7 +20,7 @@ class Blinky(Elaboratable):
         m = Module()
 
         counter = Signal(self.config.counter_bits)
-        led = self.board.get_led(platform, self.config.led_index)
+        led = self.board.get_led(self.config.led_index)
 
         m.d.sync += [
             counter.eq(counter + 1),

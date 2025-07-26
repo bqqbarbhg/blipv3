@@ -15,7 +15,7 @@ class SimBoard(Board):
     def clk_freq(self) -> float:
         return 25e6
 
-    def get_led(self, platform: Platform, index: int):
+    def get_led(self, index: int):
         led = self.leds.get(index)
         if led:
             return led
