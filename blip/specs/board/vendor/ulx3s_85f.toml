@@ -1,0 +1,10 @@
+type = "board"
+name = "ULX3S"
+
+[board]
+board = "ulx3s_85f"
+
+[components]
+sdram = [
+    "sdram/vendor/is42s16160g-7tl",
+]
