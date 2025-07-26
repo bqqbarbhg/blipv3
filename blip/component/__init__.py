@@ -60,6 +60,7 @@ def resolve_component(data) -> ComponentSpec:
 @dataclass
 class BoardSpec(ComponentSpec):
     board: str
+    clk_freq: float
     components: dict[str, ComponentSpec]
 
     def parse(data, info) -> "BoardSpec":
@@ -67,6 +68,7 @@ class BoardSpec(ComponentSpec):
         return BoardSpec(
             info=info,
             board=data["board"],
+            clk_freq=data["clk_freq"],
             components=components,
         )
 

@@ -2,6 +2,7 @@ type = "board"
 name = "ULX3S"
 
 board = "ulx3s_85f"
+clk_freq = 25_000_000
 
 [components]
 sdram = [

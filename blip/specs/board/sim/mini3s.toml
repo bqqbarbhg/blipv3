@@ -1,7 +1,8 @@
 type = "board"
-name = "Mini ULX3S"
+name = "Mini3S"
 
 board = "ulx3s_85f"
+clk_freq = 25_000_000
 
 [components]
 sdram = "sdram/sim/mini_issi"

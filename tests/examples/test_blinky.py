@@ -1,0 +1,22 @@
+from blip import Board
+from examples.simple.blinky import Blinky
+from amaranth.sim import Simulator
+import os
+
+def test_blinky():
+    board: Board = Board.load("mini3s", sim=True)
+    assert board
+
+    config = Blinky.Config(
+        counter_bits=4,
+    )
+
+    t_ck = 1.0 / board.spec.clk_freq
+
+    dut = Blinky(board, config)
+    sim = Simulator(dut)
+    sim.add_clock(t_ck)
+
+    os.makedirs("build/tests", exist_ok=True)
+    with sim.write_vcd("build/tests/blinky.vcd"):
+        sim.run_until(t_ck * 100)
