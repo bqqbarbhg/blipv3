@@ -2,7 +2,7 @@ from amaranth import *
 from amaranth.lib import wiring
 from amaranth.lib.wiring import In, Out
 from dataclasses import dataclass
-from typing import Union
+from typing import Union, Tuple
 
 @dataclass
 class PllClock:
@@ -14,7 +14,7 @@ class PllClock:
     """
 
     frequency: float
-    tolerance: Union[float, (float, float)] = 0.001
+    tolerance: Union[float, Tuple[float, float]] = 0.001
     error_weight: float = 1.0
 
     def tolerance_below(self):

@@ -1,0 +1,31 @@
+type = "sdram"
+name = "W9825G6KH-6"
+docs = "https://www.mouser.com/datasheet/2/949/w9825g6kh_a04-1489735.pdf"
+
+data_bits = 16
+row_bits = 13
+col_bits = 9
+bank_bits = 2
+auto_precharge_bit = 10
+
+[timing.cl2]
+t_ck = { min = 7.5,  max = 1000 }
+t_rc = { min = 60 }
+t_ras = { min = 42, max = 100_000 }
+t_rp = { min = 15 }
+t_rcd = { min = 15 }
+t_mrd = { min = 15 }
+t_dde = { min = 6 }
+t_xsr = { min = 72 }
+t_ref = { max = 64_000_000 }
+
+[timing.cl3]
+t_ck = { min = 6,  max = 1000 }
+t_rc = { min = 60 }
+t_ras = { min = 42, max = 100_000 }
+t_rp = { min = 15 }
+t_rcd = { min = 15 }
+t_mrd = { min = 12 }
+t_dde = { min = 6 }
+t_xsr = { min = 72 }
+t_ref = { max = 64_000_000 }

@@ -1,15 +1,14 @@
 type = "sdram"
-name = "IS42S16160G"
+name = "IS42S16160G-7TL"
 docs = "https://www.issi.com/WW/pdf/42-45S83200G-16160G.pdf"
 
-[sdram]
 data_bits = 16
 row_bits = 13
 col_bits = 9
 bank_bits = 2
 auto_precharge_bit = 10
 
-[sdram.timing.cl2]
+[timing.cl2]
 t_ck = { min = 7.5 }
 t_rc = { min = 60 }
 t_ras = { min = 37, max = 100_000 }
@@ -20,7 +19,7 @@ t_dde = { min = 7 }
 t_xsr = { min = 70 }
 t_ref = { max = 64_000_000 }
 
-[sdram.timing.cl3]
+[timing.cl3]
 t_ck = { min = 7 }
 t_rc = { min = 60 }
 t_ras = { min = 37, max = 100_000 }

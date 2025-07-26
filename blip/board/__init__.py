@@ -3,7 +3,7 @@ from amaranth.build import Platform
 from amaranth.lib.io import Pin
 from abc import ABC, abstractmethod
 
-_boards: map[str, "Board"] = { }
+_boards: dict[str, "Board"] = { }
 
 def board_definition(func):
     _boards[func.__name__] = func

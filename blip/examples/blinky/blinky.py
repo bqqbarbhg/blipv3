@@ -1,7 +1,6 @@
 from amaranth import *
 from amaranth.build import Platform
-from blip import Board
-from blip.examples import example, Example
+from blip.example import Example
 
 class Blinky(Example):
     def __init__(self):

@@ -1,0 +1,32 @@
+type = "sdram"
+name = "Slow ISSI"
+
+data_bits = 16
+row_bits = 6
+col_bits = 4
+bank_bits = 1
+auto_precharge_bit = 5
+
+[timing.cl2]
+t_ck = { min = 10, max = 1000 }
+t_rc = { min = 200 }
+t_ras = { min = 400, max = 100_000 }
+t_rp = { min = 40 }
+t_rcd = { min = 40 }
+t_mrd = { min = 30 }
+t_dde = { min = 30 }
+t_xsr = { min = 70 }
+t_ref = { max = 32_000_000 }
+
+[timing.cl3]
+t_ck = { min = 7 }
+t_rc = { min = 600 }
+t_ras = { min = 37, max = 100_000 }
+t_rp = { min = 15 }
+t_rcd = { min = 15 }
+t_mrd = { min = 10 }
+t_dde = { min = 7 }
+t_xsr = { min = 70 }
+t_ref = { max = 128_000_000 }
+
+

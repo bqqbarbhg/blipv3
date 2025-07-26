@@ -4,4 +4,7 @@ name = "Mini ULX3S"
 board = "ulx3s_85f"
 
 [components]
-sdram = "sdram/sim/mini_issi"
+sdram = [
+    "sdram/sim/mini_issi",
+    "sdram/sim/slow_issi",
+]
