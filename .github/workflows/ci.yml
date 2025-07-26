@@ -25,6 +25,7 @@ jobs:
           pip install --upgrade amaranth[builtin-yosys]
           pip install git+https://github.com/amaranth-lang/amaranth-boards.git#egg=amaranth-boards
           pip install pytest
+      - uses: YosysHQ/setup-oss-cad-suite@v3
       - name: Run tests
         run: pytest
       - name: Build examples
