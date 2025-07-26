@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Cancel any in-flight jobs for the same PR/branch so there's only one active
+# at a time
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  ci_pre_hashes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Install dependencies
+        run: |
+          pip install --upgrade amaranth[builtin-yosys]
+          pip install git+https://github.com/amaranth-lang/amaranth-boards.git#egg=amaranth-boards
+          pip install pytest
+      - name: Run tests
+        run: |
+          pytest
