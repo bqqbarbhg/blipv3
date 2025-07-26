@@ -3,17 +3,14 @@ from amaranth.sim import Simulator
 from amaranth.lib.io import SimulationPort
 from blip.component import BoardSpec
 from blip.board import Board, board_definition
-from blip.arch.ecp5 import Ecp5Arch
+from blip.arch.sim import SimArch
 
 class SimBoard(Board):
     def __init__(self, spec: BoardSpec):
-        self.arch = Ecp5Arch()
+        self.arch = SimArch()
         self.platform = None
         self.spec = spec
         self.leds: dict[int, SimulationPort] = { }
-
-    def clk_freq(self) -> float:
-        return 25e6
 
     def get_led(self, index: int):
         led = self.leds.get(index)

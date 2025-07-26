@@ -15,7 +15,7 @@ def test_blinky():
     t_ck = 1.0 / board.spec.clk_freq
 
     dut = Blinky(board, config)
-    sim = Simulator(dut)
+    sim = board.simulate(dut)
     sim.add_clock(t_ck)
 
     led = board.get_led(config.led_index)

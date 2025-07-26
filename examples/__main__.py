@@ -39,6 +39,8 @@ def get_config(example_type, argv_s):
         s_field = config_fields[s_name]
         if s_field.type == int:
             s_values[s_name] = int(s_value)
+        elif s_field.type == float:
+            s_values[s_name] = float(s_value)
     config = config_type(**s_values)
     return config
 
@@ -64,7 +66,7 @@ def cmd_sim(argv):
 
     t_ck = 1.0 / board.spec.clk_freq
 
-    sim = Simulator(example)
+    sim = board.simulate(example)
     sim.add_clock(t_ck)
     with sim.write_vcd(vcd_path):
         sim.run_until(t_ck * argv.duration)

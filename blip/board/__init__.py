@@ -1,6 +1,7 @@
 from blip.arch import Arch
 from amaranth.build import Platform
 from amaranth.lib.io import Pin
+from amaranth.sim import Simulator
 from abc import ABC, abstractmethod
 from typing import Optional
 from blip.component import ComponentSpec, BoardSpec
@@ -61,5 +62,10 @@ class Board(ABC):
         spec = ComponentSpec.load(resolve_board_path(path))
         assert isinstance(spec, BoardSpec)
         return Board.create(spec, sim=sim)
+
+    def simulate(self, m, *, engine="pysim") -> Simulator:
+        sim = Simulator(m, engine=engine)
+        self.arch.setup_simulator(sim)
+        return sim
 
 import blip.board.ulx3s

@@ -9,9 +9,6 @@ class Ulx3sBoard(Board):
         self.platform = platform
         self.spec = spec
 
-    def clk_freq(self) -> float:
-        return 25e6
-
     def get_led(self, index: int):
         assert 0 <= index < 8
         return self.platform.request("led", index)
